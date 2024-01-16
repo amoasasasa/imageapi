@@ -9,8 +9,8 @@ pipeline{
     stage('building docker image'){
       steps{
         script{
-          docker.build(${webimage},"./frontend/")
-          docker.image(${webimage}).tag("${dockerregistryurl}/${webimage}")
+          docker.build(webimage,"./frontend/")
+          docker.image(webimage).tag(dockerregistryurl/webimage)
         }
     }
     }
