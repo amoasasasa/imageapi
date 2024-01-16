@@ -9,15 +9,15 @@ pipeline{
     stage('building docker image'){
       steps{
         script{
-          docker.build(env.webimage,"./frontend/")
-          docker.image(env.webimage).tag("env.dockerregistryurl/env.webimage")
+          docker.build(${webimage},"./frontend/")
+          docker.image(${webimage}).tag("${dockerregistryurl}/${webimage}")
         }
     }
     }
     stage('pushing images to docker registry'){
       steps{
         script{
-          docker.image("env.dockerregistryurl/env.webimage").push()
+          docker.image("${dockerregistryurl}/${webimage}").push()
         }
       }
     }
