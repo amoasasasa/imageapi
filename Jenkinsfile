@@ -13,6 +13,7 @@ pipeline{
           docker.image(env.webimage).tag(env.dockerregistryurl/env.webimage)
         }
     }
+    }
     stage('pushing images to docker registry'){
       steps{
         script{
