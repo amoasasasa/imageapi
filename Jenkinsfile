@@ -10,7 +10,7 @@ pipeline{
       steps{
         script{
           docker.build(env.webimage,"./frontend/")
-          docker.image(env.webimage).tag(env.dockerregistryurl/env.webimage)
+          docker.image(env.webimage).tag("env.dockerregistryurl/env.webimage")
         }
     }
     }
