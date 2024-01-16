@@ -1,0 +1,53 @@
+#first mention version of docker compose 
+version: '3'
+services:
+    #build tag = mention the path where data related to container is present and you can provide
+    #docker file name .
+  frontend:
+    restart: always
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    volumes:
+      - /app/node_modules
+      - ./frontend:/app
+  api:
+    restart: always
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    ports:
+      - '5050:5050'
+    volumes:
+      - ./api:/app
+
+  mongo:
+    image: mongo:latest
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: strong-password
+    volumes:
+      - mongo_data:/data/db
+  mongo-express:
+    image: mongo-express:latest
+    restart: always
+    ports:
+      - 7000:8081
+    environment:
+      ME_CONFIG_MONGODB_DATABASE: mongo
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: strong-password
+      ME_CONFIG_MONGODB_URL: mongodb://root:strong-password@mongo:27017/
+    #depends_on tag ensures that mongo express container will start only after mongo container.
+    #means if mongo container is not up , express container also will be not up. It's good practice.
+    depends_on:
+      - mongo
+  
+
+  #we are creating custom volume to store the data of mongo database. 
+volumes:
+  mongo_data:
+  
