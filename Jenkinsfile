@@ -17,7 +17,7 @@ pipeline{
     stage('pushing images to docker registry'){
       steps{
         script{
-          docker.image(env.dockerregistryurl/env.webimage).push()
+          docker.image("env.dockerregistryurl/env.webimage").push()
         }
       }
     }
