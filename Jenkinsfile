@@ -1,7 +1,7 @@
 pipeline{
   agent any
   environment{
-    webimage='webinterface'
+    webimage="localhost:5000/webinterface"
     apiimage='imageapi'
     dockerregistryurl='localhost:5000'
   }
@@ -10,14 +10,13 @@ pipeline{
       steps{
         script{
           docker.build(webimage,"./frontend/")
-          docker.image(webimage).tag(dockerregistryurl/webimage)
-        }
+        }    
     }
     }
     stage('pushing images to docker registry'){
       steps{
         script{
-          docker.image("${dockerregistryurl}/${webimage}").push()
+          dockerImage.push(webimage)
         }
       }
     }
