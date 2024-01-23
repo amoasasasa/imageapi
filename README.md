@@ -14,10 +14,4 @@ Project for the **Dockerfiles** and **Docker Compose** sections
 UNSPLASH_KEY=<Paste copied Access Key here>
 ```
 
-**EXAMPLE** with fake code(don't try to use it in your app):
-
-```
-UNSPLASH_KEY=2MJvApIkV13hfg2LmQlneILfHoJ2ttlzSdPKefGOyKM
-```
-
 - Save modified **.env.local** file
